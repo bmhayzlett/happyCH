@@ -561,7 +561,7 @@ function sendWelcomeButtonMessage(recipientId) {
   }, {
     type: "postback",
     payload: "looking for homework help",
-    title: "Looking for homework help?"
+    title: "Need homework help?"
   }]
   sendButtonMessage(recipientId, buttonMessage, optionsArray)
 }
@@ -594,11 +594,11 @@ function sendHomeworkHelpGeneric(recipientId) {
   var buttons = [{
     type: "web_url",
     url: "https://www.coursehero.com/study-materials/",
-    title: "Find resources by School"
+    title: "Find by School"
   }, {
     type: "web_url",
     url: "https://www.coursehero.com/subjects/",
-    title: "Find resources by Subject"
+    title: "Find by Subject"
   // }, {
   //   type: "web_url",
   //   url: "https://www.coursehero.com/lit/",
