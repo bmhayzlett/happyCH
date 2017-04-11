@@ -18,6 +18,8 @@ const
   https = require('https'),
   request = require('request');
 
+Wit = require('node-wit').Wit;
+
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
@@ -29,6 +31,10 @@ app.use(express.static('public'));
  * set them using environment variables or modifying the config file in /config.
  *
  */
+
+const WIT_TOKEN = (process.env.WIT_TOKEN) ?
+ process.env.WIT_TOKEN :
+ config.get('witToken');
 
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
@@ -50,6 +56,9 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 const SERVER_URL = (process.env.SERVER_URL) ?
   (process.env.SERVER_URL) :
   config.get('serverURL');
+
+const client = new Wit({accessToken: WIT_TOKEN});
+
 
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   console.error("Missing config values");
@@ -250,71 +259,31 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-
+    const sessionId = findOrCreateSession(senderID);
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
-      case 'Get Started':
-
-      case 'image':
-        sendImageMessage(senderID);
-        break;
-
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
-
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
-
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
-
-      case 'file':
-        sendFileMessage(senderID);
-        break;
-
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
-
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
-
-      case 'receipt':
-        sendReceiptMessage(senderID);
-        break;
-
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;
-
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;
-
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;
-
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;
-
-      case 'account linking':
-        sendAccountLinking(senderID);
-        break;
-
-      default:
+      case 'help':
         sendWelcomeButtonMessage(senderID);
+        break;
+      default:
+        let witResponse = sendToWit(messageText);
+        sendTextMessage(senderID, witResponse);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
+}
+
+function sendToWit(messageText, context = {}) {
+  client.message(messageText, {})
+  .then((data) => {
+    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+    return JSON.stringify(data)
+  })
+  .catch(console.error);
+  return "I didn't understand that :(";
 }
 
 
@@ -864,6 +833,8 @@ function callSendAPI(messageData) {
     }
   });
 }
+
+
 
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid

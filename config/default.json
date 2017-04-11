@@ -2,5 +2,6 @@
     "appSecret": "267901824f3e1fcda8186ce6bbf8efa5",
     "pageAccessToken": "EAAFhfRYDncoBAAwZAhWWD2ZC8WVNVZAEiiWZBgmjMd0JNgdKYpTy3UBuuBZCdNMPlNTW7UtHwRNINhnwy8coExfDtbwcQ6SblqvUEKuGKZBOrSYawFQdQoYiIuelEIMaxutYsFP4cyhh4arBe8Mc3BKG13J5ZBK6bHlRKdhQ7yN1wZDZD",
     "validationToken": "happy_ch_verify_token",
-    "serverURL": "https://happy-ch.herokuapp.com/"
+    "serverURL": "https://happy-ch.herokuapp.com/",
+    "witToken": "EYCAJJS5DQW6OJDVDBIV7VDPWD6YYM6G"
 }
