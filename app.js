@@ -367,10 +367,10 @@ function receivedPostback(event) {
   // let them know it was successful
   switch(payload) {
     case "Get Started":
-      sendButtonMessage(senderID)
+      sendButtonMessage(senderID);
       break;
     default:
-      sendTextMessage(senderId,"hello sender")
+      sendTextMessage(senderID,"hello sender " + senderID);
   }
   sendTextMessage(senderID, "Postback called");
 }
