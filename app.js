@@ -370,13 +370,16 @@ function receivedPostback(event) {
       sendWelcomeButtonMessage(senderID);
       break;
     case "about course hero":
-      sendAboutUsMessage(senderID)
+      sendAboutUsMessage(senderID);
       break;
     case "looking for homework help":
-      sendHomeworkHelpGeneric(senderID)
+      sendHomeworkHelpGeneric(senderID);
       break;
     case "billing help":
-      sendBillingHelpMessage(senderID)
+      sendBillingHelpMessage(senderID);
+      break;
+    case "what else":
+      sendWhatElseMessage(senderID);
       break;
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
@@ -550,17 +553,22 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 function sendAboutUsMessage(recipientId) {
-  let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed."
-  sendTextMessage(recipientId, messageText)
-  messageText = "Learn more at our About us page. https://www.coursehero.com/about-us/"
-  setTimeout(sendTextMessage.bind(this, recipientId, messageText), 500)
+  let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed.";
+  sendTextMessage(recipientId, messageText);
+  messageText = "Learn more at our About us page. https://www.coursehero.com/about-us/";
+  setTimeout(sendTextMessage.bind(this, recipientId, messageText), 1000);
 }
 
 function sendBillingHelpMessage(recipientId) {
-  let messageText = "Currently we accept requests for cancellation, refund, change membership, check refund status and other billing issues."
-  sendTextMessage(recipientId, messageText)
-  messageText = "If you need help with any billing issues, please submit your request here. https://support.coursehero.com/hc/en-us"
-  setTimeout(sendTextMessage.bind(this, recipientId, messageText), 500)
+  let messageText = "Currently we accept requests for cancellation, refund, change membership, check refund status and other billing issues.";
+  sendTextMessage(recipientId, messageText);
+  messageText = "If you need help with any billing issues, please submit your request here. https://support.coursehero.com/hc/en-us";
+  setTimeout(sendTextMessage.bind(this, recipientId, messageText), 1000);
+}
+
+function sendWhatElseMessage(recipientId) {
+  let messageText = "Find more support here :D https://support.coursehero.com/hc/en-us";
+  sendTextMessage(recipientId, messageText);
 }
 
 function sendWelcomeButtonMessage(recipientId) {
@@ -577,6 +585,10 @@ function sendWelcomeButtonMessage(recipientId) {
     type: "postback",
     payload: "billing help",
     title: "Billing"
+  }, {
+    type: "postback",
+    payload: "what else",
+    title: "What else?"
   }]
   sendButtonMessage(recipientId, buttonMessage, optionsArray)
 }
