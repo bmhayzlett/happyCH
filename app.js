@@ -568,7 +568,7 @@ function sendWelcomeButtonMessage(receiptId) {
  * Send a button message using the Send API.
  *
  */
-function sendButtonMessage(recipientId, buttonMessage optionsArray) {
+function sendButtonMessage(recipientId, buttonMessage, optionsArray) {
   var messageData = {
     recipient: {
       id: recipientId
