@@ -374,6 +374,10 @@ function receivedPostback(event) {
       break;
     case "looking for homework help":
       sendHomeworkHelpGeneric(senderID)
+      break;
+    case "billing help":
+      sendBillingHelpMessage(senderID)
+      break;
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
@@ -552,6 +556,13 @@ function sendAboutUsMessage(recipientId) {
   sendTextMessage(recipientId, messageText)
 }
 
+function sendBillingHelpMessage(recipientId) {
+  let messageText = "If you need help with any billing issues, please submit your request here. https://support.coursehero.com/hc/en-us"
+  sendTextMessage(recipientId, messageText)
+  messageText = "Currently we accept requests for cancellation, refund, change membership, check refund status and other billing issues."
+  sendTextMessage(recipientId, messageText)
+}
+
 function sendWelcomeButtonMessage(recipientId) {
   var buttonMessage = "How can we help you today?"
   var optionsArray = [{
@@ -562,6 +573,10 @@ function sendWelcomeButtonMessage(recipientId) {
     type: "postback",
     payload: "looking for homework help",
     title: "Need homework help?"
+  }, {
+    type: "postback",
+    payload: "billing help",
+    title: "Billing"
   }]
   sendButtonMessage(recipientId, buttonMessage, optionsArray)
 }
