@@ -268,7 +268,7 @@ function receivedMessage(event) {
         sendWelcomeButtonMessage(senderID);
         break;
       default:
-        let witResponse = sendToWit(messageText);
+        let witResponse = sendToWit(messageText, {});
         sendTextMessage(senderID, witResponse);
     }
   } else if (messageAttachments) {
@@ -276,8 +276,8 @@ function receivedMessage(event) {
   }
 }
 
-function sendToWit(messageText, context = {}) {
-  client.message(messageText, {})
+function sendToWit(messageText, context) {
+  client.message(messageText, context)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     return JSON.stringify(data)
