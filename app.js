@@ -599,10 +599,11 @@ function sendHomeworkHelpGeneric(recipientId) {
     type: "web_url",
     url: "https://www.coursehero.com/subjects/",
     title: "Find resources by Subject"
-  }, {
-    type: "web_url",
-    url: "https://www.coursehero.com/lit/",
-    title: "Find resources by Book"
+  // }, {
+  //   type: "web_url",
+  //   url: "https://www.coursehero.com/lit/",
+  //   title: "Find resources by Book"
+  // }
   }, {
     type: "web_url",
     url: "https://www.coursehero.com/tutors/homework-help/",
