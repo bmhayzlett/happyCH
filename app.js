@@ -19,6 +19,7 @@ const
   fetch = require('node-fetch'),
   request = require('request');
 
+let Wit = null;
 Wit = require('node-wit').Wit;
 
 var app = express();
