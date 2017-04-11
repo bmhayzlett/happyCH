@@ -310,7 +310,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendWelcomeButtonMessage(recipientId);
+        sendWelcomeButtonMessage(recipientID);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
