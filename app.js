@@ -375,7 +375,6 @@ function receivedPostback(event) {
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
-  sendTextMessage(senderID, "Postback called");
 }
 
 /*
