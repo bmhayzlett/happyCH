@@ -546,12 +546,9 @@ function sendTextMessage(recipientId, messageText) {
 
 function sendAboutUsMessage(recipientId) {
   let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed."
-  let optionsArray = [{
-    type: "web_url",
-    url: "https://www.coursehero.com/about-us/",
-    title: "About Course Hero"
-  }]
-  sendButtonMessage(recipientId, messageText)
+  sendTextMessage(recipientId, messageText)
+  messageText = "Learn more at our About us page. https://www.coursehero.com/about-us/"
+  sendTextMessage(receiptId, messageText)
 }
 
 function sendWelcomeButtonMessage(receiptId) {
@@ -580,15 +577,6 @@ function sendButtonMessage(recipientId, buttonMessage, optionsArray) {
           template_type: "button",
           text: buttonMessage,
           buttons: optionsArray
-          // {
-          //   type: "postback",
-          //   title: "Trigger Postback",
-          //   payload: "DEVELOPER_DEFINED_PAYLOAD"
-          // }, {
-          //   type: "phone_number",
-          //   title: "Call Phone Number",
-          //   payload: "+16505551234"
-          // }
         }
       }
     }
