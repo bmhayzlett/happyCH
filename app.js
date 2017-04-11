@@ -378,9 +378,6 @@ function receivedPostback(event) {
     case "billing help":
       sendBillingHelpMessage(senderID);
       break;
-    case "what else":
-      sendWhatElseMessage(senderID);
-      break;
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
@@ -566,11 +563,6 @@ function sendBillingHelpMessage(recipientId) {
   setTimeout(sendTextMessage.bind(this, recipientId, messageText), 1000);
 }
 
-function sendWhatElseMessage(recipientId) {
-  let messageText = "Find more support here :D https://support.coursehero.com/hc/en-us";
-  sendTextMessage(recipientId, messageText);
-}
-
 function sendWelcomeButtonMessage(recipientId) {
   var buttonMessage = "How can we help you today?"
   var optionsArray = [{
@@ -585,10 +577,6 @@ function sendWelcomeButtonMessage(recipientId) {
     type: "postback",
     payload: "billing help",
     title: "Billing"
-  }, {
-    type: "postback",
-    payload: "what else",
-    title: "What else?"
   }]
   sendButtonMessage(recipientId, buttonMessage, optionsArray)
 }
