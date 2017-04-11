@@ -627,7 +627,7 @@ function sendHomeworkHelpGeneric(recipientId) {
   var elements = [{
     title: "Looking for homework help?",
     subtitle: "We currently support with millions study resources and 24/7 tutor help.",
-    image_url: SERVER_URL + "/assets/ch-homework.png",
+    image_url: SERVER_URL + "/assets/homework-help.png",
     buttons: buttons
   }]
 
