@@ -551,7 +551,7 @@ function sendAboutUsMessage(recipientId) {
   sendTextMessage(receiptId, messageText)
 }
 
-function sendWelcomeButtonMessage(receiptId) {
+function sendWelcomeButtonMessage(recipientId) {
   var buttonMessage = "How can we help you today?"
   var optionsArray = [{
     type: "postback",
