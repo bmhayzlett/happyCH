@@ -547,7 +547,7 @@ function sendAboutUsMessage(recipientId) {
   let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed."
   sendTextMessage(recipientId, messageText)
   messageText = "Learn more at our About us page. https://www.coursehero.com/about-us/"
-  sendTextMessage(receiptId, messageText)
+  sendTextMessage(recipientId, messageText)
 }
 
 function sendWelcomeButtonMessage(recipientId) {
