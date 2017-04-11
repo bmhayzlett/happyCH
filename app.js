@@ -564,7 +564,7 @@ function sendBillingHelpMessage(recipientId) {
 }
 
 function sendWelcomeButtonMessage(recipientId) {
-  var buttonMessage = "How can we help you today?"
+  var buttonMessage = "How can we help you today? :)"
   var optionsArray = [{
     type: "postback",
     payload: "about course hero",
