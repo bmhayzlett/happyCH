@@ -366,7 +366,7 @@ function receivedPostback(event) {
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
   switch(payload) {
-    case "Get Started":
+    case "get started":
       sendButtonMessage(senderID);
       break;
     default:
