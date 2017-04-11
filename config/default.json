@@ -1,6 +1,6 @@
 {
     "appSecret": "",
     "pageAccessToken": "happy_ch_verify_token",
-    "validationToken": "",
+    "validationToken": "happy_ch_verify_token",
     "serverURL": ""
 }
