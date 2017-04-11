@@ -372,6 +372,8 @@ function receivedPostback(event) {
     case "about course hero":
       sendAboutUsMessage(senderID)
       break;
+    case "looking for homework help":
+      sendHomeworkHelpGeneric(senderID)
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
@@ -556,6 +558,10 @@ function sendWelcomeButtonMessage(recipientId) {
     type: "postback",
     payload: "about course hero",
     title: "What's Course Hero?"
+  }, {
+    type: "postback",
+    payload: "looking for homework help",
+    title: "Looking for homework help?"
   }]
   sendButtonMessage(recipientId, buttonMessage, optionsArray)
 }
@@ -584,11 +590,39 @@ function sendButtonMessage(recipientId, buttonMessage, optionsArray) {
   callSendAPI(messageData);
 }
 
+function sendHomeworkHelpGeneric(recipientId) {
+  var buttons = [{
+    type: "web_url",
+    url: "https://www.coursehero.com/study-materials/",
+    title: "Find resources by School"
+  }, {
+    type: "web_url",
+    url: "https://www.coursehero.com/subjects/",
+    title: "Find resources by Subject"
+  }, {
+    type: "web_url",
+    url: "https://www.coursehero.com/lit/",
+    title: "Find resources by Book"
+  }, {
+    type: "web_url",
+    url: "https://www.coursehero.com/tutors/homework-help/",
+    title: "Ask Tutor a Question"
+  }]
+  var elements = [{
+    title: "Looking for homework help?",
+    subtitle: "We currently support with millions study resources and 24/7 tutor help.",
+    image_url: SERVER_URL + "/assets/ch-homework.png",
+    buttons: buttons
+  }]
+
+  sendGenericMessage(recipientId, elements)
+}
+
 /*
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId, elements) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -598,35 +632,7 @@ function sendGenericMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [{
-            title: "rift",
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",
-            image_url: SERVER_URL + "/assets/rift.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
-            }],
-          }, {
-            title: "touch",
-            subtitle: "Your Hands, Now in VR",
-            item_url: "https://www.oculus.com/en-us/touch/",
-            image_url: SERVER_URL + "/assets/touch.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/touch/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for second bubble",
-            }]
-          }]
+          elements: elements
         }
       }
     }
