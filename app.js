@@ -367,7 +367,10 @@ function receivedPostback(event) {
   // let them know it was successful
   switch(payload) {
     case "get started":
-      sendButtonMessage(senderID);
+      sendWelcomeButtonMessage(senderID);
+      break;
+    case "about course hero":
+      sendAboutUsMessage(senderID)
       break;
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
@@ -541,11 +544,31 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+function sendAboutUsMessage(recipientId) {
+  let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed."
+  let optionsArray = [{
+    type: "web_url",
+    url: "https://www.coursehero.com/about-us/",
+    title: "About Course Hero"
+  }]
+  sendButtonMessage(recipientId, messageText)
+}
+
+function sendWelcomeButtonMessage(receiptId) {
+  var buttonMessage = "How can we help you today?"
+  var optionsArray = [{
+    type: "postback",
+    payload: "about course hero",
+    title: "What's Course Hero?"
+  }]
+  sendButtonMessage(recipientId, buttonMessage, optionsArray)
+}
+
 /*
  * Send a button message using the Send API.
  *
  */
-function sendButtonMessage(recipientId) {
+function sendButtonMessage(recipientId, buttonMessage optionsArray) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -555,20 +578,17 @@ function sendButtonMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "button",
-          text: "This is test text",
-          buttons:[{
-            type: "web_url",
-            url: "https://www.coursehero.com/about-us/",
-            title: "What's Course Hero?"
-          }, {
-            type: "postback",
-            title: "Trigger Postback",
-            payload: "DEVELOPER_DEFINED_PAYLOAD"
-          }, {
-            type: "phone_number",
-            title: "Call Phone Number",
-            payload: "+16505551234"
-          }]
+          text: buttonMessage,
+          buttons: optionsArray
+          // {
+          //   type: "postback",
+          //   title: "Trigger Postback",
+          //   payload: "DEVELOPER_DEFINED_PAYLOAD"
+          // }, {
+          //   type: "phone_number",
+          //   title: "Call Phone Number",
+          //   payload: "+16505551234"
+          // }
         }
       }
     }
