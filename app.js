@@ -553,14 +553,14 @@ function sendAboutUsMessage(recipientId) {
   let messageText = "Course Hero’s mission is to build the biggest and best digital library of course-specific questions and answers to help students and educators succeed."
   sendTextMessage(recipientId, messageText)
   messageText = "Learn more at our About us page. https://www.coursehero.com/about-us/"
-  sendTextMessage(recipientId, messageText)
+  setTimeout(sendTextMessage.bind(recipientId, messageText), 250)
 }
 
 function sendBillingHelpMessage(recipientId) {
-  let messageText = "If you need help with any billing issues, please submit your request here. https://support.coursehero.com/hc/en-us"
+  let messageText = "Currently we accept requests for cancellation, refund, change membership, check refund status and other billing issues."
   sendTextMessage(recipientId, messageText)
-  messageText = "Currently we accept requests for cancellation, refund, change membership, check refund status and other billing issues."
-  sendTextMessage(recipientId, messageText)
+  messageText = "If you need help with any billing issues, please submit your request here. https://support.coursehero.com/hc/en-us"
+  setTimeout(sendTextMessage.bind(recipientId, messageText), 250)
 }
 
 function sendWelcomeButtonMessage(recipientId) {
