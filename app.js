@@ -281,10 +281,10 @@ function sendToWit(senderId, messageText, context) {
   client.converse(senderId, messageText, context)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-    return JSON.stringify(data)
+    return JSON.stringify(data);
   })
   .catch(console.error);
-  return "I didn't understand that :(";
+  return JSON.stringify(data)['msg'];
 }
 
 
