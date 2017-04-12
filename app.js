@@ -255,7 +255,7 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
-    sendToWit(senderID, quickReply['text'], {})
+    sendToWit(senderID, messageText, {})
     return;
   }
 
