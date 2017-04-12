@@ -21,6 +21,7 @@ const
 
 let Wit = null;
 Wit = require('node-wit').Wit;
+const {interactive} = require('node-wit')
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -283,8 +284,8 @@ function receivedMessage(event) {
 }
 
 function sendToWit(sessionId, messageText, senderId) {
-  console.log("SenderId is %s, messageText is %s", sessionId, messageText)
-  client.converse(sessionId, messageText)
+  console.log("SessionId is %s, messageText is %s, senderId is %s", sessionId, messageText, senderId)
+  interactive(client).converse(sessionId, messageText)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     if(data["quickreplies"]) {
