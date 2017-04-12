@@ -255,7 +255,7 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
-    sendToWit(senderID, messageText, {})
+    sendToWit(senderID, messageText)
     return;
   }
 
@@ -272,7 +272,7 @@ function receivedMessage(event) {
         sendWelcomeButtonMessage(senderID);
         break;
       default:
-        sendToWit(senderID, messageText, {});
+        sendToWit(senderID, messageText);
         break;
     }
   } else if (messageAttachments) {
@@ -280,9 +280,9 @@ function receivedMessage(event) {
   }
 }
 
-function sendToWit(senderId, messageText, context) {
-  console.log("SenderId is %s, messageText is %s, and context is %s", senderId, messageText, context)
-  client.converse(senderId, messageText, context)
+function sendToWit(senderId, messageText) {
+  console.log("SenderId is %s, messageText is %s", senderId, messageText)
+  client.converse(senderId, messageText)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     if(data["quickreplies"]) {
