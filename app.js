@@ -355,7 +355,6 @@ function receivedPostback(event) {
     case "billing help":
       sendBillingHelpMessage(senderID);
       break;
-    case
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
