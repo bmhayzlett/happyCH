@@ -246,6 +246,8 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
+  const sessionId = findOrCreateSession(senderID);
+
   if (isEcho) {
     // Just logging message echoes to console
     console.log("Received echo for message %s and app %d with metadata %s",
@@ -255,7 +257,7 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
-    sendToWit(senderID, messageText)
+    sendToWit(sessionId, messageText, senderID)
     return;
   }
 
@@ -272,7 +274,7 @@ function receivedMessage(event) {
         sendWelcomeButtonMessage(senderID);
         break;
       default:
-        sendToWit(senderID, messageText);
+        sendToWit(sessionId, messageText, senderID);
         break;
     }
   } else if (messageAttachments) {
@@ -280,9 +282,9 @@ function receivedMessage(event) {
   }
 }
 
-function sendToWit(senderId, messageText) {
-  console.log("SenderId is %s, messageText is %s", senderId, messageText)
-  client.converse(senderId, messageText)
+function sendToWit(sessionId, messageText, senderId) {
+  console.log("SenderId is %s, messageText is %s", sessionId, messageText)
+  client.converse(sessionId, messageText)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     if(data["quickreplies"]) {
@@ -294,6 +296,25 @@ function sendToWit(senderId, messageText) {
   })
   .catch(console.error);
 }
+
+const sessions = {};
+
+const findOrCreateSession = (fbid) => {
+  let sessionId;
+  // Let's see if we already have a session for the user fbid
+  Object.keys(sessions).forEach(k => {
+    if (sessions[k].fbid === fbid) {
+      // Yep, got it!
+      sessionId = k;
+    }
+  });
+  if (!sessionId) {
+    // No session found for user fbid, let's create a new one
+    sessionId = new Date().toISOString();
+    sessions[sessionId] = {fbid: fbid, context: {}};
+  }
+  return sessionId;
+};
 
 
 /*
