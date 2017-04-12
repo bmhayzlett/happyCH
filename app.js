@@ -284,7 +284,7 @@ function receivedMessage(event) {
 
 function sendToWit(sessionId, messageText, senderId) {
   console.log("SessionId is %s, messageText is %s, senderId is %s", sessionId, messageText, senderId)
-  client.runActions(sessionId, messageText)
+  client.runActions(sessionId, messageText, {})
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     if(data["quickreplies"]) {
