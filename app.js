@@ -255,6 +255,7 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
+    sendToWit(senderID, quickReply.text, {})
     return;
   }
 
@@ -272,6 +273,7 @@ function receivedMessage(event) {
         break;
       default:
         sendToWit(senderID, messageText, {});
+        break;
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -353,6 +355,7 @@ function receivedPostback(event) {
     case "billing help":
       sendBillingHelpMessage(senderID);
       break;
+    case
     default:
       sendTextMessage(senderID,"hello sender " + senderID);
   }
@@ -713,7 +716,7 @@ function sendQuickReply(recipientId, text, titles) {
         return {
           "content_type":"text",
           "title":title,
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+          "payload":"leave feedback"
         }
       })
     }
