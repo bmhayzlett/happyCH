@@ -279,10 +279,16 @@ function receivedMessage(event) {
 function sendToWit(senderId, messageText, context) {
   client.converse(senderId, messageText, context)
   .then((data) => {
-    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data)['msg']);
-    sendTextMessage(senderId, JSON.stringify(data)['msg']);
+    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+    parseAndRespondFromWit(senderId, JSON.stringify(data));
   })
   .catch(console.error);
+}
+
+function parseAndRespondFromWit(senderId, jsonObject) {
+  Object.keys(jsonObject).forEach(function(key) {
+    console.log("Key is " + key + " and value is " + jsonObject[key])
+  })
 }
 
 
