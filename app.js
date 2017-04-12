@@ -285,7 +285,7 @@ function sendToWit(senderId, messageText, context) {
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
     if(data["quickreplies"]) {
-      sendQuickReply(sendierId, data['msg'], data['quickreplies'])
+      sendQuickReply(senderId, data['msg'], data['quickreplies'])
     } else {
       sendTextMessage(senderId, data['msg']);
     }
