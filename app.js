@@ -265,6 +265,10 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
+
+      case 'quick reply':
+        sendQuickReply(senderID);
+        break;
       case 'help':
         sendWelcomeButtonMessage(senderID);
         break;
