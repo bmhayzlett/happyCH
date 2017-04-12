@@ -284,7 +284,12 @@ function sendToWit(senderId, messageText, context) {
   client.converse(senderId, messageText, context)
   .then((data) => {
     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-    sendTextMessage(senderId, data['msg']);
+    if(data["quickreplies"]) {
+      sendQuickReply(sendierId, data['msg'], data['quickreplies'])
+    } else {
+      sendTextMessage(senderId, data['msg']);
+    }
+
   })
   .catch(console.error);
 }
@@ -699,30 +704,20 @@ function sendReceiptMessage(recipientId) {
  * Send a message with Quick Reply buttons.
  *
  */
-function sendQuickReply(recipientId) {
+function sendQuickReply(recipientId, text, titles) {
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "What's your favorite movie genre?",
-      quick_replies: [
-        {
+      text: text,
+      quick_replies: titles.map(function(title) {
+        return {
           "content_type":"text",
-          "title":"Action",
+          "title":title,
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-        },
-        {
-          "content_type":"text",
-          "title":"Comedy",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Drama",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
         }
-      ]
+      })
     }
   };
 
